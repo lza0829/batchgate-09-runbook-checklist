@@ -17,5 +17,19 @@ onMounted(async () => {
       <p>编排 {{ stats.orchestration_count }} · 尝试 {{ stats.attempt_count }}</p>
       <p>已有水位的作业 {{ stats.watermarked_jobs }}</p>
     </div>
+    <div class="panel" v-if="stats">
+      <h3 style="margin-top:0">Runbook 闸门</h3>
+      <p>
+        <span class="tag" :class="stats.runbook_can_start ? 'ok' : 'danger'">
+          {{ stats.runbook_can_start ? '可开跑' : '禁止开跑' }}
+        </span>
+        <span class="muted" style="margin-left:0.6rem">
+          必做 {{ stats.runbook_counts?.required_done }}/{{ stats.runbook_counts?.required }} ·
+          待办 {{ stats.runbook_counts?.pending }}
+        </span>
+      </p>
+      <p v-if="!stats.runbook_can_start" class="mono muted">{{ stats.runbook_reasons?.join('；') }}</p>
+      <router-link to="/orchestrate">去编排台处理步骤 →</router-link>
+    </div>
   </div>
 </template>

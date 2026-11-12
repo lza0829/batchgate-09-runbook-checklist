@@ -1,10 +1,11 @@
 from fastapi import APIRouter
 
-from app.routers import attempts, dashboard, jobs, orchestrations, settings, watermarks
+from app.routers import attempts, dashboard, jobs, orchestrations, runbook, settings, watermarks
 
 api = APIRouter(prefix="/api")
 api.include_router(dashboard.router)
 api.include_router(jobs.router)
+api.include_router(runbook.router)
 api.include_router(orchestrations.router)
 api.include_router(attempts.router)
 api.include_router(watermarks.router)

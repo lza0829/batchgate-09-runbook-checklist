@@ -2,7 +2,6 @@ from fastapi import APIRouter, HTTPException
 
 from app.db import connect
 from app.repositories import orchestrations as orch_repo
-from app.services.orchestrate_service import run_orchestration
 
 router = APIRouter(tags=["orchestrations"])
 
@@ -26,8 +25,3 @@ def get_orchestration(orch_id: int):
         return row
     finally:
         conn.close()
-
-
-@router.post("/orchestrations")
-def create_orchestration():
-    return run_orchestration()
